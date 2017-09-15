@@ -1,0 +1,93 @@
+@echo off
+
+echo. 
+echo  **********************************************
+echo  ********** Molina IT Service Desk  ***********
+echo  ********** Full Cache Clear Script ***********
+echo  **********************************************
+echo.
+echo.
+
+echo. 
+echo  ***************************************************************************
+echo  ********** This script will close any and all Internet Explorer ***********
+echo  ********** processes, clear IE and Java caches                  ***********
+echo  ********** ALL UNSAVED WORK WILL BE LOST!                       ***********
+echo  ***************************************************************************
+echo.
+echo.
+
+pause
+taskkill /F /IM iexplore.exe
+
+echo.
+echo. 
+echo  **********************************************
+echo  ********* Starting IE Cache(s) Clear *********
+echo  **********************************************
+echo.
+
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 8
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 2
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 1
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 16
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 32
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 255
+RunDll32.exe InetCpl.cpl,ClearMyTracksByProcess 4351
+
+echo. 
+echo  **********************************************
+echo  ******** Starting Java Cache(s) Clear ********
+echo  **********************************************
+echo.
+
+del "C:\Documents and Settings\%username%\Application Data\Sun\Java\Deployment\cache\*.*" /q /s /f
+del "C:\Documents and Settings\%username%.%userdomain%\Application Data\Sun\Java\Deployment\cache\*.*" /q /s /f
+del "C:\Users\%appdata%\AppData\LocalLow\Sun\Java\Deployment\cache\*.*" /q /s /f
+cls
+
+echo. 
+echo  **********************************************
+echo  ******* Starting Temporary File Clear ********
+echo  **********************************************
+echo.
+
+del *.tmp /s /f /q
+del *.chk /s /f /q
+rd c:\windows\temp /s /q
+cd\
+md c:\windows\temp
+del "c:\documents and settings\%username%\local settings\temp\*.*" /q /s /f
+del "c:\documents and settings\%username.%userdomain%\local settings\temp\*.*" /q /s /f
+
+cls
+
+echo. 
+echo  **********************************************
+echo  ********* Starting Cookie Clean-Up ***********
+echo  **********************************************
+echo.
+
+del "c:\documents and settings\%username%.%userdomain%\cookies\*.*" /q /s /f
+del "c:\documents and settings\%username%\cookies\*.*" /q /s /f
+cls
+
+echo. 
+echo  **********************************************
+echo  ******** Starting Prefetch Clean-Up **********
+echo  **********************************************
+echo.
+
+del "C:\WINDOWS\Prefetch\*.*" /q /s /f
+
+echo.
+echo. 
+echo  **********************************************
+echo  ********** Molina IT Service Desk  ***********
+echo  ********** Full PC CLEAN OUT Script **********
+echo  **********       !COMPLETED!       ***********
+echo  **********************************************
+echo.
+echo.
+
+pause
